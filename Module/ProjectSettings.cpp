@@ -100,8 +100,6 @@ void CProjectSettings::Load()
 		gSettings_Game.assetFolder = project.assetDirectory;
 		gSettings_Game.codeFolder = project.codeDirectory;
 
-		SConsoleVariableHelper helper;
-
 		for (const auto& var : project.consoleVariables)
 		{
 			helper.consoleVariables[var.first] = var.second;
@@ -160,13 +158,6 @@ void CProjectSettings::Save()
 		project.assetDirectory = gSettings_Game.assetFolder;
 		project.codeDirectory = gSettings_Game.codeFolder;
 
-		SConsoleVariableHelper helper;
-
-		for (const auto& var : project.consoleVariables)
-		{
-			helper.consoleVariables[var.first] = var.second;
-		}
-
 		for (const auto& it : m_preferences)
 		{
 			for (const auto& page : it.second)
@@ -179,16 +170,17 @@ void CProjectSettings::Save()
 
 		bool bShowRestartDialog = false;
 
-		for (const auto& var : helper.consoleVariables)
+		for (auto& var : helper.consoleVariables)
 		{
-			if (var.second.bIsChanged)
-			{
-				gEnv->pConsole->ExecuteString(string().Format("%s %s", var.first.c_str(), var.second.value.c_str()));
-			}
-
 			if (var.second.bIsChanged && var.second.bIsRequestRestart)
 			{
 				bShowRestartDialog = true;
+			}
+
+			if (var.second.bIsChanged)
+			{
+				gEnv->pConsole->ExecuteString(string().Format("%s %s", var.first.c_str(), var.second.value.c_str()));
+				var.second.bIsChanged = false;
 			}
 
 			project.consoleVariables[var.first] = var.second.value;

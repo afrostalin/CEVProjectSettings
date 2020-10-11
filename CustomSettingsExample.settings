@@ -1,0 +1,65 @@
+{
+  "configs": [
+    {
+      "category": "Game",
+	  "path" : "Game/TestCategory",
+      "variables": [
+        {
+          "name": "g_myBool",
+          "value": "0",
+          "description": "My bool variable",
+          "type": "Bool",
+		  "requestRestart" : true
+        },
+        {
+          "name": "g_myInt",
+          "value": "1",
+          "description": "My int variable",
+          "type": "Int",
+		  "requestRestart" : false
+        },
+		{
+          "name": "g_myFloat",
+          "value": "0.5",
+          "description": "My float variable",
+          "type": "Float",
+		  "requestRestart" : false
+        },
+        {
+          "name": "g_myString",
+          "value": "Hey, crycommunity!",
+          "description": "My string variable",
+          "type": "String",
+		  "requestRestart" : false
+		  
+        },
+        {
+          "name": "g_myEnum",
+          "value": "0",
+          "description": "My enum variable",
+          "type": "Enum",
+          "enumDescription": [
+            {
+              "key": "0",
+              "description": "My enum 0"
+            },
+            {
+              "key": "1",
+              "description": "My enum 1"
+            },
+            {
+              "key": "2",
+              "description": "My enum 2"
+            }
+			,
+            {
+              "key": "3",
+              "description": "My awesome enum"
+            }
+          ],
+		  "requestRestart" : false
+        }
+      ]
+    }
+  ]
+}

@@ -92,7 +92,12 @@ struct SConsoleVariableHelper
 			}
 		}
 
-		consoleVariables.emplace(szCVarName, szValue);
+		SVariableValue variable;
+		variable.value = szValue;
+		variable.bIsRequestRestart = isRequestRestart;
+		variable.bIsChanged = true;
+
+		consoleVariables.emplace(szCVarName, variable);
 	}
 
 	struct SVariableValue
@@ -119,6 +124,8 @@ struct SConsoleVariable
 		Enum
 	};
 
+	SConsoleVariable() {}
+
 	SConsoleVariable(string _name, QVariant _value, EType _type, bool _restart)
 		: name(_name)
 		, value(_value)
@@ -128,6 +135,7 @@ struct SConsoleVariable
 	}
 
 	string   name;
+	string   description;
 	QVariant value;
 	EType    type = EType::String;
 	bool     bIsRequestRestart = false;
@@ -296,6 +304,7 @@ public:
 	CCrySignal<void()> signalSettingsReset;
 
 private:
+	SConsoleVariableHelper helper;
 	std::map<string, std::vector<SProjectSettingsPage*>> m_preferences;
 	bool m_bIsLoading;
 };

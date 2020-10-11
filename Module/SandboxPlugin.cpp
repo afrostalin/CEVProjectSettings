@@ -5,6 +5,7 @@
 #include "SandboxPlugin.h"
 #include "ProjectSettings.h"
 #include "ProjectSettingsDialog.h"
+#include "CustomParser.h"
 
 #include <CryCore/Platform/platform_impl.inl>
 
@@ -20,8 +21,10 @@ CCEVProjectSettingsPlugin::CCEVProjectSettingsPlugin()
 	g_pInstance = this;
 
 	m_pProjectSettings = new CProjectSettings();
+	m_pParser = new CCustomParser();
 
 	CAutoRegisterProjectSettingsHelper::RegisterAll();
+	m_pParser->FindAndParseCustomSettings();
 
 	m_pProjectSettings->Init();
 }
@@ -32,6 +35,7 @@ CCEVProjectSettingsPlugin::~CCEVProjectSettingsPlugin()
 	g_pInstance = nullptr;
 
 	SAFE_DELETE(m_pProjectSettings);
+	SAFE_DELETE(m_pParser);
 
 	CAutoRegisterProjectSettingsHelper::UnregisterAll();
 }

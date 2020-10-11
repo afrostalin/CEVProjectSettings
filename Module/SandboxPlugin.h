@@ -7,6 +7,7 @@
 #include <IPlugin.h>
 
 class CProjectSettings;
+class CCustomParser;
 
 class CCEVProjectSettingsPlugin : public IPlugin
 {
@@ -22,7 +23,9 @@ public:
 	virtual int32       GetPluginVersion() override;
 	//~IPlugin
 public:
-	CProjectSettings* GetProjectSettings() { return m_pProjectSettings; }
+	CProjectSettings* GetProjectSettings() const { return m_pProjectSettings; }
+	CCustomParser*    GetParser() const { return m_pParser;}
 private:
 	CProjectSettings* m_pProjectSettings = nullptr;
+	CCustomParser*    m_pParser = nullptr;
 };

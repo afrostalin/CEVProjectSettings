@@ -6,7 +6,7 @@
 * Automatic project file backup befory save any changes
 * Update project settings at runtime and save it to .cryproject file
 * Automatic Sandbox restart if you changes needed it
-
+* Customize settings pages without coding (See `CustomSettingsExample.settings`)
 
 # Building
 ## Before compiling
